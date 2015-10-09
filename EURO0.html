@@ -1,0 +1,140 @@
+<html>
+	<head>
+		<title>EUROMILHOES KEY GENERATOR</title>
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="EURO.css">
+		<style>
+			h1 {
+				color:red;
+				font-size: 10px;
+			}
+		</style>
+		<script> 
+		
+			function init() {
+				clearb = document.getElementById("b_clear");
+				clearb.onclick = function () {
+					document.getElementById("content").innerHTML="";
+					} 
+				newkeyb = document.getElementById("b_getnew");
+				newkeyb.onclick = genkey;
+				document.getElementById("content").innerHTML="";
+			}
+			
+			function genkey() {
+				var allnumbers = Array();
+				var allstars   = Array();
+				var numbers = Array();
+				var stars   = Array(); 
+				
+				//fill all numbers 
+				
+				for(var i=0; i<50; i++) {
+					allnumbers[i] = i+1;
+				}
+				//fill all stars
+				for(var i=0; i<11; i++) {
+					allstars[i] = i+1;
+				}
+				// just to check
+				//console.log("numbers:",allnumbers);
+				//console.log("stars:",allstars);
+				
+				// extract 5 numbers
+				
+				for (i=0; i< 5; i++) {
+					// generate the random index
+					random_idx = Math.floor(Math.random() * allnumbers.length);
+					//console.log("r:",random_idx);
+					// extract the element from rhe array
+					n = allnumbers.splice(random_idx,1);
+					
+					numbers.push(n[0]);
+					
+				}
+				
+				numbers.sort(function (a,b) {
+					return a-b;
+				});
+				console.log("numbers:",numbers);
+				
+				
+				for (i=0; i< 2; i++) {
+					// generate the random index
+					random_idx = Math.floor(Math.random() * allstars.length);
+					//console.log("r:",random_idx);
+					// extract the element from rhe array
+					n = allstars.splice(random_idx,1);
+					
+					stars.push(n[0]);
+					
+				}
+			
+				stars.sort(compare);
+				
+				console.log("stars:",stars);
+			
+				function compare(a,b) {
+					return a-b;
+				}
+				
+				// identify the div id = content
+				
+				var divcontent=document.getElementById("content");
+				console.log(divcontent);
+				var divkey = document.createElement("div");
+				divkey.setAttribute("class","key");
+				//console.log(divkey);
+				divcontent.appendChild(divkey);
+				
+				listofnumbers = document.createElement("ul");
+				listofnumbers.setAttribute("class","numbers");
+				for(var i=0; i<numbers.length; i++) {
+					newli = document.createElement("li");
+					newli.innerHTML = numbers[i];
+					listofnumbers.appendChild(newli);
+				}
+				divkey.appendChild(listofnumbers);
+				
+				listofstars = document.createElement("ul");
+				listofstars.setAttribute("class","stars");
+				for(var i=0; i<stars.length; i++) {
+					newli = document.createElement("li");
+					newli.innerHTML = stars[i];
+					listofstars.appendChild(newli);
+				}
+				divkey.appendChild(listofstars);
+			}
+			
+		</script>
+		
+	</head>
+	<body onload="init();">
+		<h1>Network Information Systems</h1>
+		<div id="heading" style="color:blue">
+			<p>EUROMILHÕES KEY GENERATOR</p>
+		</div>
+		<div id="control">
+			<button id="b_getnew">Get a new Key</button>
+			<button id="b_clear">Clear</button>
+			
+		</div>
+		<div id="content">
+			<div class="key">
+			 <ul class="numbers">
+				<li>9</li>
+				<li>10</li>
+				<li>15</li>
+				<li>25</li>
+				<li>33</li>
+			 </ul>
+			 <ul class="stars">
+				<li>5</li>
+				<li>6</li>
+			 </ul>
+			</div>
+			9 10 15 25 33 + 5 6
+		</div>
+	</body>	
+
+</html>
