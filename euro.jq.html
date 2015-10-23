@@ -1,0 +1,197 @@
+<html>
+    <head>
+        <title>Euromilhões key generator</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="euro.css">
+        <style>
+            h1{
+                color:red;
+                font-size:25px;
+            }
+        </style>
+        <script src="jquery/jquery-2.1.4.js"></script>
+        <script>
+ 
+            $(document).ready(function (){
+                $("#b_clear").click(function () {
+                            $("#content").empty();
+                });
+                
+                //clearb = document.getElementById("b_clear");
+                //clearb.onclick = function () {
+                //    document.getElementById("content").innerHTML="";
+                //}
+               $("#b_getnew").click(gen_key);
+                
+                //newkeyb = document.getElementById("b_getnew");
+                //newkeyb.onclick = gen_key;
+                
+                $("#content").empty();
+                //document.getElementById("content").innerHTML="";
+                
+                $("#b_getext").click(makeAjaxRequest);
+            });
+            
+            
+            function makeAjaxRequest() {
+                //alert("ola");
+                $.ajax("json.js",{
+                    success: displaykey,
+                    method: "GET",
+                    dataType : "json" });
+            }
+                       
+            function displaykey(data) {
+                    alert(data.numbers);
+                }
+                       
+            function gen_key(){   
+                var allnumbers = new Array();
+                var allstars = new Array();
+                var numbers = new Array(); 
+                var stars = new Array();
+                
+                //fill all numbers
+                for(var i=0; i<50; i++){
+                    allnumbers[i] = i+1;   
+                }
+                
+                //fill all stars 
+                for(var i=0; i<11; i++){
+                    allstars[i] = i+1;   
+                }
+                
+                //extract 5 numbers
+                for(i=0; i<5;i++){
+                    //generate random idx
+                   random_idx = Math.floor(Math.random() * allnumbers.length);
+                    
+                   var n = allnumbers.splice(random_idx,1)
+                    
+                    numbers.push(n[0]);
+                
+                }                
+                
+               //extract 2 numbers
+                for(i=0; i<2;i++){
+                    //generate random idx
+                   random_idx = Math.floor(Math.random() * allstars.length);
+                    
+                   var n = allstars.splice(random_idx,1)
+                    
+                    stars.push(n[0]);
+                
+                }
+                
+                function compare(a,b){
+                    return a-b
+                }
+                
+                numbers.sort(compare);
+                stars.sort(compare);
+                
+                console.log("finalnumbers:",numbers);
+                console.log("finalstars:",stars);
+                
+                
+                // Identify the div_id=content
+                
+                
+                
+                //var divcontent=document.getElementById("content");
+                //var divkey = document.createElement("div");
+                
+                //divkey.setAttribute("class","key");         //folha de classe
+                //divcontent.appendChild(divkey);
+                
+                
+                listofnumbers = $("<ul class='numbers'/>");
+                
+                /*
+                listofnumbers = document.createElement("ul");
+                listofnumbers.setAttribute("class","numbers");   // folha de classe
+                */
+                
+                $.each(numbers,function (idx,val) {
+                    listofnumbers.append($("<li/>").html(val));
+                });
+                
+                /*
+                for(var i=0; i<numbers.length; i++){
+                    newli = document.createElement("li");
+                    newli.innerHTML = numbers[i];
+                    listofnumbers.appendChild(newli);
+                }
+                divkey.appendChild(listofnumbers);
+                */
+                
+                listofstars = $("<ul class='stars'/>");
+                
+                //listofstars = document.createElement("ul");
+                //listofstars.setAttribute("class","stars");
+                
+                 $.each(stars,function (idx,val) {
+                    listofstars.append($("<li/>").html(val));
+                });
+                
+                /*
+                for(var i=0; i<stars.length; i++){
+                    newli = document.createElement("li");
+                    newli.innerHTML = numbers[i];
+                    listofstars.appendChild(newli);
+                }
+                divkey.appendChild(listofstars);
+                */
+                            
+                $("#content").append($("<div/>").addClass("key").append(listofnumbers).append(listofstars));
+                
+                console.log(divcontent);
+                console.log(divkey);
+                
+                /* document.getElementById("<id>");
+
+                   document.getElementByTagName("<Tags>");
+                   element.
+                   document.getElementByClass("<class>");
+                   element.                             
+                   ----------------------------------------
+                   document.createElement("<tags>");
+                   element.setAttribute("<att>","<value>");
+                   ----------------------------------------
+                   element.appendChield(<elem>);
+                   element.innerHTML="<....>";            */
+                
+            }
+        </script>
+        
+    </head>
+    <body>
+        <h1>Network Information Systems</h1>
+        
+        <div id="heading" style="color:blue">
+            <p>EuroMilhões key generator</p>
+        </div>
+        
+        <div id="control">
+            <button id="b_getnew">Get a new key</button>
+            <button id="b_clear">Clear</button>
+            <button id="b_getext">Get External Key</button>
+        </div>
+        
+        <div id="content">
+            <div class="key">
+                <ul class="numbers">
+                    <li>9</li>
+                    <li>10</li>
+                    <li>15</li>
+                    <li>25</li>
+                    <li>33</li>
+                </ul>
+                <ul class="stars">
+                    <li>5</li>
+                    <li>6</li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
