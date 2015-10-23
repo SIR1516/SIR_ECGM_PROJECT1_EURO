@@ -35,14 +35,30 @@
             
             function makeAjaxRequest() {
                 //alert("ola");
-                $.ajax("json.js",{
+                //$.ajax("http://www.estg.ipvc.pt/~pmoreira/sir/euro/serveChave.php",{
+                $.ajax("keyServer.php", {
                     success: displaykey,
                     method: "GET",
                     dataType : "json" });
             }
                        
             function displaykey(data) {
-                    alert(data.numbers);
+            	
+                 listofnumbers = $("<ul class='numbers'/>");
+                
+                $.each(data.numbers,function (idx,val) {
+                    listofnumbers.append($("<li/>").html(val));
+                });
+                
+                
+                listofstars = $("<ul class='stars'/>");
+                
+                 $.each(data.stars,function (idx,val) {
+                    listofstars.append($("<li/>").html(val));
+                });
+                            
+                $("#content").append($("<div/>").addClass("key").append(listofnumbers).append(listofstars));
+           
                 }
                        
             function gen_key(){   
